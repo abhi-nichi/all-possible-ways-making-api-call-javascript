@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Ajax Api call by jQuery</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        $.ajax({
-          url: "https://jsonplaceholder.typicode.com/users",
-          type: "GET",
-          success: function(result) {
-            console.log(result);
-          },
-          error: function(error) {
-            console.log(error);
+
+<head>
+  <title>Ajax Api call by jQuery</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    getSelectedElement = () => {   // Arrow function to get selected element from dropdown list
+      alert(document.getElementById("items").value)
+    }
+    $(document).ready(function () {
+      $.ajax({
+        url: "https://jsonplaceholder.typicode.com/users",
+        type: "GET",
+        success: function (result) {
+          console.log(result);
+          for (var i = 0; i < result.length; i++) {
+            $('<option/>').val(result[i].name).html(result[i].name).appendTo('#items');
           }
-        });
+        },
+        error: function (error) {
+          console.log(error);
+        }
       });
-    </script>
-  </head>
-  <body></body>
+    });
+
+  </script>
+</head>
+
+<body>
+  <select id="items" onchange="getSelectedElement()">
+
+  </select>
+
+</body>
+
 </html>
